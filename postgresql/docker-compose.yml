@@ -10,7 +10,6 @@ services:
       - /home/evandro/Documentos/Infra/postgresqlData:/var/lib/postgresql/data 
     networks:
       - postgres-compose-network
-##Instância do pgAdmin4, na porta 16543
   teste-pgadmin-compose:
     image: dpage/pgadmin4
     environment:
