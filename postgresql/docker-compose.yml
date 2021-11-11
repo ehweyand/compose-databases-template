@@ -1,0 +1,27 @@
+version: '3'
+services:
+  teste-postgres-compose:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "15432:5432"
+    volumes:
+      - /home/evandro/Documentos/Infra/postgresqlData:/var/lib/postgresql/data 
+    networks:
+      - postgres-compose-network
+##Instância do pgAdmin4, na porta 16543
+  teste-pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.br"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+    ports:
+      - "16543:80"
+    depends_on:
+      - teste-postgres-compose
+    networks:
+      - postgres-compose-network
+networks: 
+  postgres-compose-network:
+    driver: bridge
